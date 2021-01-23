@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ParkHere</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    TextResouce  -->
     <string name="book_ButtonTextResource">Book</string>
     <string name="place_ButtonTextResource">Place</string>
+    <string name="amount_in_wallet_static_TextResource">Amount in Wallet</string>
+    <string name="btc_static_TextResource">BTC</string>
 </resources>

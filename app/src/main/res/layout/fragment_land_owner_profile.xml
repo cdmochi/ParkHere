@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:background="#4A6572"
+    android:layout_height="match_parent">
 
+    <!--    contains the options to whether BookParklot or OfferParkLocation -->
     <LinearLayout
         android:id="@+id/top_panel_linearLy"
-        android:layout_width="428dp"
-        android:layout_height="166dp"
-        android:background="@drawable/screen_top_shape"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="18dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,79 +22,129 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha=".4"
-            android:text="Amount in Wallet"
+            android:text="@string/amount_in_wallet_static_TextResource"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_width="381dp"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BTC"
-                android:textColor="@color/orange_bitcoin"
+                android:layout_height="match_parent"
+                android:background="@drawable/screen_top_currency_shape"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/btc_static_TextResource"
+                android:textColor="@color/white"
                 android:textSize="34sp" />
 
             <TextView
+                android:id="@+id/wallet_amount_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/screen_top_amount_shape"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:padding="4dp"
                 android:text="1243.21"
-                android:textColor="#FBFFE3"
+                android:textColor="#1E1F1A"
                 android:textSize="54sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-    <!--    contains the options to whether BookParklot or OfferParkLocation -->
     <RadioGroup
-        android:layout_width="match_parent"
+        android:layout_margin="28dp"
+        android:id="@+id/tabpanel_rg"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/top_panel_linearLy"
-        tools:layout_editor_absoluteX="-25dp">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_panel_linearLy">
 
         <RadioButton
-            android:background="@drawable/radio_flat_with_anim_selector"
-            android:textColor="@drawable/radio_flat_text_selector"
-            android:text="First"
-            android:gravity="center"
-            android:button="@android:color/transparent"
             android:id="@+id/book_rbt"
-            android:checked="true"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:background="@drawable/radio_flat_with_anim_selector"
-            android:textColor="@drawable/radio_flat_text_selector"
-            android:text="Second"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:gravity="center"
+            android:text="Park"
+            android:textColor="@drawable/radio_flat_text_selector" />
+
+        <RadioButton
+            android:id="@+id/lend_rbt"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_flat_with_anim_selector"
             android:button="@android:color/transparent"
             android:gravity="center"
-            android:id="@+id/lend_rbt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:text="Lend"
+            android:textColor="@drawable/radio_flat_text_selector" />
 
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lands_rv"
+        android:layout_margin="16dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg"
         tools:itemCount="10"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/land_itemview" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/lands_rv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg" >
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/no_location_ic" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:alpha=".2"
+            android:rotationX="2"
+            app:srcCompat="@drawable/background_circle_shape"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="419dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:alpha=".6"
+            android:text="No Parking Location \n At The Moment"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="560dp" />
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

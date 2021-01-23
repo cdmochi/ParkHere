@@ -6,64 +6,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnLayout
-import com.pete.parkhere.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelLazy
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.pete.parkhere.data.entity.Land
 import com.pete.parkhere.data.local.Location
 import com.pete.parkhere.data.local.LocationsDB
+import com.pete.parkhere.databinding.FragmentLandOwnerProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class LandOwnerProfileFragment : Fragment() {
 
+    private var _binding: FragmentLandOwnerProfileBinding? = null
+    val binding get() = _binding!!
+//    private lateinit var appContainer: AppContainer
+
+//    private val viewModel by lazy {
+//        val factory = LandOwnerProfileVMFactory(appContainer.repository)
+//        ViewModelProvider(this ,factory).get(LandOwnerProfileViewModel::class.java)
+//    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        appContainer = (requireActivity().applicationContext as MyApplication).appContainer
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_land_owner_profile, container, false)
+        _binding = FragmentLandOwnerProfileBinding.inflate(inflater,container,false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val dao = LocationsDB.getInstance(requireActivity().applicationContext).locationDao()
 
-        val mockLocation = arrayListOf<Location>().apply {
-            add(Location(0,
-                "London eyes",
-                13.221,
-                12.2123,
-                "",
-                "20012021-10:00",
-                "20012021-12:00",
-                122)
-            )
-            add(Location(1,
-                "London YEYEYE",
-                13.221,
-                12.2123,
-                "",
-                "20012021-10:00",
-                "20012021-12:00",
-                123)
-            )
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            Log.d("CoroutineScope","${Thread.currentThread()}")
-            dao.insertAll(mockLocation[0],mockLocation[1])
-            val mockLocations = dao.getAllLocations()
-            Log.d("logScope",mockLocations[0].name)
-        }
-
-
+        val list = mutableListOf(Land("THIS IS AMAZING!!"))
+        initRecycler(list)
 
     }
 
-    fun logLocations(locations: ArrayList<Location>) {
-        Log.d("logScope",locations[0].name)
+    private fun initRecycler(locations: MutableList<Land>) {
+        val recycler = binding.landsRv
+        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
+        val adapter = Adapter(locations)
+        recycler.layoutManager = layoutManager
+        recycler.adapter = adapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

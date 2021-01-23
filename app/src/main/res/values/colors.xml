@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange_bitcoin">#FF9900</color>
     <color name="grey_button">#636060</color>
+    <color name="white_80_opacity">#CCFFFFFF</color>
 
 <!--    reserved for experiment  -->
     <color name="colorAccent">@color/orange_bitcoin</color>

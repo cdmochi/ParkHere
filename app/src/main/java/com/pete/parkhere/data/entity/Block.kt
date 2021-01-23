@@ -4,11 +4,15 @@ import com.pete.parkhere.data.local.Location
 
 data class Block(val index: Int,
                  val location: Location,
+                 val from : User,
+                 val to : User,
                  var previous: String = "",
-                 var hash: String = "") {
+                 var hash: String = "",
+                 val bookingDetails: String = ""
+) {
 
-    fun calculateHash() {
-        return
-    }
+//    fun calculateHash() {
+//    }
+
 }
 
