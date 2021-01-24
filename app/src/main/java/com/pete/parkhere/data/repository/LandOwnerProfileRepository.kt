@@ -6,7 +6,7 @@ import com.pete.parkhere.data.local.Location
 
 interface LandOwnerProfileRepository {
 
-    suspend fun getAllLocations(): LiveData<MutableList<Location>>
+    suspend fun getAllLocations(): MutableList<Location>
 
     suspend fun insertAll(vararg locations: Location)
 

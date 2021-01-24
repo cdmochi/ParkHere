@@ -18,12 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class LandOwnerProfileFragment : Fragment() {
 
     private var _binding: FragmentLandOwnerProfileBinding? = null
-    val binding
-        get() = _binding!!
+    val binding get() = _binding!!
     private val viewModel by  viewModels<LandOwnerProfileViewModel>()
-    private lateinit var adapter: Adapter
 
     var locations = mutableListOf<Location>()
+    private var adapter: Adapter = Adapter(locations)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +36,10 @@ class LandOwnerProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        locations.add(Location("Bazaar0",1212.12,121.12,"","12:00","14:00",1222))
         initRecyclerView()
-//        viewModel.getAllLocations { locationLiveData: LiveData<MutableList<Location>> ->
-//            locationLiveData.observe(viewLifecycleOwner, Observer {newLocations: MutableList<Location> ->
-//                updateAdapter(newLocations)
-//            })
-//        }
+        viewModel._locations.observe(viewLifecycleOwner, Observer { newList ->
+            updateAdapter(newList)
+        })
     }
 
     private fun updateAdapter(newList: MutableList<Location>) {
@@ -56,7 +52,7 @@ class LandOwnerProfileFragment : Fragment() {
         val recycler = binding.landsRv
         recycler.setHasFixedSize(true)
         recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        recycler.adapter = Adapter(locations)
+        recycler.adapter = adapter
     }
 
     override fun onDestroy() {

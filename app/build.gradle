@@ -94,6 +94,8 @@ dependencies {
     //Lifecycle with CameraX
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
 
+    implementation 'androidx.multidex:multidex:2.0.1'
+
 
 
 
