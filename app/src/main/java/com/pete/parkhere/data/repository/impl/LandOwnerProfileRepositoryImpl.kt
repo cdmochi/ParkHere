@@ -9,8 +9,11 @@ import com.pete.parkhere.data.repository.LandOwnerProfileRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LandOwnerProfileRepositoryImpl(val applicaitonCtx : Context,val locationDB : LocationDao)
+@Singleton
+class LandOwnerProfileRepositoryImpl @Inject constructor(val locationsLocalDB: LocationDatabase)
     : LandOwnerProfileRepository {
 
     override suspend fun getAllLocations(): LiveData<List<Location>> {
@@ -18,7 +21,9 @@ class LandOwnerProfileRepositoryImpl(val applicaitonCtx : Context,val locationDB
             init {
                 val coroutineCtx = Dispatchers.IO
                 CoroutineScope(coroutineCtx).launch {
-                    val newData = locationDB.getAllLocations()
+                    val newData = locationsLocalDB
+                        .locationDao()
+                        .getAllLocations()
                     value(newData)
                 }
             }

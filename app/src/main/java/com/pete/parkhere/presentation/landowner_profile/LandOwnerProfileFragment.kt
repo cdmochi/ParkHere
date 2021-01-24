@@ -1,40 +1,26 @@
 package com.pete.parkhere.presentation.landowner_profile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelLazy
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pete.parkhere.data.entity.Land
+import com.pete.parkhere.data.entity.ParkLocation
 import com.pete.parkhere.data.local.Location
-import com.pete.parkhere.data.local.LocationsDB
 import com.pete.parkhere.databinding.FragmentLandOwnerProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LandOwnerProfileFragment : Fragment() {
 
     private var _binding: FragmentLandOwnerProfileBinding? = null
     val binding get() = _binding!!
-//    private lateinit var appContainer: AppContainer
 
-//    private val viewModel by lazy {
-//        val factory = LandOwnerProfileVMFactory(appContainer.repository)
-//        ViewModelProvider(this ,factory).get(LandOwnerProfileViewModel::class.java)
-//    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        appContainer = (requireActivity().applicationContext as MyApplication).appContainer
-    }
+    private val viewModel by  viewModels<LandOwnerProfileViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +33,15 @@ class LandOwnerProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dao = LocationsDB.getInstance(requireActivity().applicationContext).locationDao()
 
-        val list = mutableListOf(Land("THIS IS AMAZING!!"))
-        initRecycler(list)
-
+        viewModel.getAllLocations { locationLiveData: LiveData<List<Location>> ->
+            locationLiveData.observe(viewLifecycleOwner, Observer {newLocations: List<Location>->
+                initRecycler(newLocations)
+            })
+        }
     }
 
-    private fun initRecycler(locations: MutableList<Land>) {
+    private fun initRecycler(locations: List<Location>) {
         val recycler = binding.landsRv
         val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         val adapter = Adapter(locations)

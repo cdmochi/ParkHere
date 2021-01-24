@@ -7,7 +7,9 @@ import android.view.WindowManager
 import androidx.core.view.doOnLayout
 import com.pete.parkhere.R
 import com.pete.parkhere.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

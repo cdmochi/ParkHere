@@ -1,9 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+
 
 }
 
@@ -54,11 +55,11 @@ dependencies {
 
     //Architecture Components
 
-    //ViewModel
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // LiveData
+    // LiveData & ViewModel
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //Navigation
@@ -82,6 +83,11 @@ dependencies {
     //hilt Dependencies Injection
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Migratev plain ViewModel to hilt
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
+    kaptAndroidTest "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
 
 
 }
