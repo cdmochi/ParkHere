@@ -5,8 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "location")
-data class Location(
-    @PrimaryKey(autoGenerate = true) val uid: Int,
+data class Location constructor(
     val name: String,
     val lat: Double,
     val lon: Double,
@@ -14,6 +13,9 @@ data class Location(
     @ColumnInfo(name="time_from") val timeFrom: String,
     @ColumnInfo(name="time_to") val timeTo: String,
     val price: Int
-)
+) {
+    @PrimaryKey(autoGenerate = true) var uid: Int = -1
+
+}
 
 

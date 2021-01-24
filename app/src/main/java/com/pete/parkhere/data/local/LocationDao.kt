@@ -6,7 +6,7 @@ import androidx.room.*
 interface LocationDao {
 
     @Query("SELECT * FROM location")
-    suspend fun getAllLocations(): List<Location>
+    suspend fun getAllLocations(): MutableList<Location>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg locations: Location)

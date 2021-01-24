@@ -6,44 +6,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pete.parkhere.data.local.Location
-import com.pete.parkhere.data.repository.LandOwnerProfileRepository
+import com.pete.parkhere.data.repository.impl.LandOwnerProfileRepositoryImpl
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class LandOwnerProfileViewModel @ViewModelInject constructor(
-        private val repository: LandOwnerProfileRepository
+        private val repository: LandOwnerProfileRepositoryImpl
 ) : ViewModel() {
 
-    val locations = MutableLiveData<ArrayList<Location>>()
-    val mockLocation = arrayListOf<Location>().apply {
-        locations.value!!.add(
-                Location(
-                        0,
-                        "London eyes",
-                        13.221,
-                        12.2123,
-                        "",
-                        "20012021-10:00",
-                        "20012021-12:00",
-                        122)
-        )
-        locations.value!!.add(
-                Location(
-                        1,
-                        "London YEYEYE",
-                        13.221,
-                        12.2123,
-                        "",
-                        "20012021-10:00",
-                        "20012021-12:00",
-                        123)
-        )
-    }
+    val locations = MutableLiveData<MutableList<Location>>()
 
     init {
-        locations.value = mockLocation
+        val newList = mutableListOf<Location>().apply {
+            add(Location("Bazaar0",1212.12,121.12,"","12:00","14:00",1222))
+            add(Location("Bazaar1",1212.12,121.12,"","12:00","14:00",1222))
+            add(Location("Bazaar2",1212.12,121.12,"","12:00","14:00",1222))
+            add(Location("Bazaar3",1212.12,121.12,"","12:00","14:00",1222))
+            add(Location("Bazaar4",1212.12,121.12,"","12:00","14:00",1222))
+        }
+
+        locations.value = newList
     }
 
-    fun getAllLocations(callback: (LiveData<List<Location>>) -> Unit) {
+    fun getAllLocations(callback: (LiveData<MutableList<Location>>) -> Unit) {
         viewModelScope.launch {
             val data = repository.getAllLocations()
             callback(data)

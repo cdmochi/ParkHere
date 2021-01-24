@@ -8,64 +8,82 @@
     android:layout_height="match_parent">
 
     <!--    contains the options to whether BookParklot or OfferParkLocation -->
-    <LinearLayout
-        android:id="@+id/top_panel_linearLy"
-        android:layout_width="0dp"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft ="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        android:padding="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha=".4"
-            android:text="@string/amount_in_wallet_static_TextResource"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="381dp"
-            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/screen_top_currency_shape"
+                android:layout_height="50dp"
+                android:background="@color/orange_bitcoin"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/btc_static_TextResource"
                 android:textColor="@color/white"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/amount_in_wallet_static_TextResource"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/wallet_amount_tv"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/screen_top_amount_shape"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:text="1243.21"
                 android:textColor="#1E1F1A"
-                android:textSize="54sp" />
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <RadioGroup
-        android:layout_margin="28dp"
         android:id="@+id/tabpanel_rg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_panel_linearLy">
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
         <RadioButton
             android:id="@+id/book_rbt"
@@ -92,11 +110,13 @@
 
     </RadioGroup>
 
+    <!--    each card's margin is 12 -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lands_rv"
-        android:layout_margin="16dp"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,46 +125,46 @@
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/land_itemview" />
 
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/lands_rv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg" >
+<!--    <FrameLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/lands_rv"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg" >-->
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/no_location_ic" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView3"-->
+<!--            android:layout_width="130dp"-->
+<!--            android:layout_height="130dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:srcCompat="@drawable/no_location_ic" />-->
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:alpha=".2"
-            android:rotationX="2"
-            app:srcCompat="@drawable/background_circle_shape"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="419dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView5"-->
+<!--            android:layout_width="170dp"-->
+<!--            android:layout_height="170dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:alpha=".2"-->
+<!--            android:rotationX="2"-->
+<!--            app:srcCompat="@drawable/background_circle_shape"-->
+<!--            tools:layout_editor_absoluteX="134dp"-->
+<!--            tools:layout_editor_absoluteY="419dp" />-->
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:alpha=".6"
-            android:text="No Parking Location \n At The Moment"
-            android:textAlignment="center"
-            tools:layout_editor_absoluteX="88dp"
-            tools:layout_editor_absoluteY="560dp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal|bottom"-->
+<!--            android:alpha=".6"-->
+<!--            android:text="No Parking Location \n At The Moment"-->
+<!--            android:textAlignment="center"-->
+<!--            tools:layout_editor_absoluteX="88dp"-->
+<!--            tools:layout_editor_absoluteY="560dp" />-->
 
-    </FrameLayout>
+<!--    </FrameLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

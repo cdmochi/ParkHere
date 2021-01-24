@@ -8,6 +8,7 @@ import com.pete.parkhere.data.local.LocationDatabase
 import com.pete.parkhere.data.repository.LandOwnerProfileRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,18 +17,18 @@ import javax.inject.Singleton
 class LandOwnerProfileRepositoryImpl @Inject constructor(val locationsLocalDB: LocationDatabase)
     : LandOwnerProfileRepository {
 
-    override suspend fun getAllLocations(): LiveData<List<Location>> {
-        return object: LiveData<List<Location>>() {
+    override suspend fun getAllLocations(): LiveData<MutableList<Location>> {
+        return object: LiveData<MutableList<Location>>() {
             init {
+                val job = Job()
                 val coroutineCtx = Dispatchers.IO
-                CoroutineScope(coroutineCtx).launch {
+                CoroutineScope(coroutineCtx + job).launch {
                     val newData = locationsLocalDB
                         .locationDao()
                         .getAllLocations()
-                    value(newData)
+                    postValue(newData)
                 }
             }
-            fun value(fromLocal : List<Location>) { this.value = fromLocal }
         }
     }
 
