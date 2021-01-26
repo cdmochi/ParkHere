@@ -4,12 +4,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.pete.parkhere.data.local.Location
 import com.pete.parkhere.data.repository.impl.LandOwnerProfileRepositoryImpl
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LandOwnerProfileViewModel @ViewModelInject constructor(
         private val repository: LandOwnerProfileRepositoryImpl
 ) : ViewModel() {
-
 
     var _locations = MutableLiveData<MutableList<Location>>()
 
@@ -30,6 +30,18 @@ class LandOwnerProfileViewModel @ViewModelInject constructor(
         }
     }
 
+    fun addNewLocation(newLocation: Location) {
+        viewModelScope.launch {
+            repository.insertAll(newLocation)
+            _locations.value = repository.getAllLocations()
+        }
+    }
+
+    fun deleteLocation(location: Location) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(location)
+        }
+    }
 
 
 }

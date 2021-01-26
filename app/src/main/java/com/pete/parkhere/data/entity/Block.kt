@@ -11,8 +11,5 @@ data class Block(val index: Int,
                  val bookingDetails: String = ""
 ) {
 
-//    fun calculateHash() {
-//    }
-
 }
 

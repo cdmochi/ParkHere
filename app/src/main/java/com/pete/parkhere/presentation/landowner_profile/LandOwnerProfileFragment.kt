@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.pete.parkhere.data.local.Location
 import com.pete.parkhere.databinding.FragmentLandOwnerProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,8 +20,8 @@ class LandOwnerProfileFragment : Fragment() {
 
     private var _binding: FragmentLandOwnerProfileBinding? = null
     val binding get() = _binding!!
-    private val viewModel by  viewModels<LandOwnerProfileViewModel>()
 
+    private val viewModel by  viewModels<LandOwnerProfileViewModel>()
     var locations = mutableListOf<Location>()
     private var adapter: Adapter = Adapter(locations)
 
@@ -35,11 +36,15 @@ class LandOwnerProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        initRecyclerView()
 
-        initRecyclerView()
-        viewModel._locations.observe(viewLifecycleOwner, Observer { newList ->
-            updateAdapter(newList)
-        })
+//        viewModel._locations.observe(viewLifecycleOwner, Observer { newList ->
+//            updateAdapter(newList)
+//        })
+
+        val newAdapter = ViewPagerAdapter(this,binding.tabpanelRg)
+        binding.locationVpager.adapter = newAdapter
+
     }
 
     private fun updateAdapter(newList: MutableList<Location>) {
@@ -49,15 +54,24 @@ class LandOwnerProfileFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        val recycler = binding.landsRv
-        recycler.setHasFixedSize(true)
-        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        recycler.adapter = adapter
+//        val recycler = binding.landsRv
+//        recycler.setHasFixedSize(true)
+//        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+//        recycler.adapter = adapter
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+    companion object {
+
+        fun getInstance(): LandOwnerProfileFragment {
+            return LandOwnerProfileFragment()
+        }
+
     }
 
 }

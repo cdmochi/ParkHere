@@ -1,15 +1,8 @@
 package com.pete.parkhere.data.repository.impl
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.pete.parkhere.data.local.Location
-import com.pete.parkhere.data.local.LocationDao
 import com.pete.parkhere.data.local.LocationDatabase
 import com.pete.parkhere.data.repository.LandOwnerProfileRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,10 +14,9 @@ class LandOwnerProfileRepositoryImpl @Inject constructor(private val locationsLo
 
     override suspend fun getAllLocations(): MutableList<Location> {
 
-            val data = locationsLocalDB
-                    .locationDao()
-                    .getAllLocations()
-        return data
+        return locationsLocalDB
+                .locationDao()
+                .getAllLocations()
 
 //        return object: LiveData<MutableList<Location>>() {
 //            init {
@@ -41,10 +33,14 @@ class LandOwnerProfileRepositoryImpl @Inject constructor(private val locationsLo
     }
 
     override suspend fun insertAll(vararg locations: Location) {
-        TODO("Not yet implemented")
+        locationsLocalDB
+                .locationDao()
+                .insertAll(*locations)
     }
 
     override suspend fun delete(location: Location) {
-        TODO("Not yet implemented")
+        locationsLocalDB
+                .locationDao()
+                .delete(location)
     }
 }

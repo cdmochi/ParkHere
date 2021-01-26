@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pete.parkhere.data.entity.ParkLocation
 import com.pete.parkhere.data.local.Location
 import com.pete.parkhere.databinding.LandItemviewBinding
 
