@@ -2,7 +2,7 @@ package com.pete.parkhere.di
 
 import android.content.Context
 import androidx.room.Room
-import com.pete.parkhere.data.local.LocationDatabase
+import com.pete.parkhere.data.local.BlockDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +16,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalDatabaseInstance(@ApplicationContext appContext: Context) : LocationDatabase =
-            Room.databaseBuilder(appContext , LocationDatabase::class.java,"locations")
+    fun provideLocalDatabaseInstance(@ApplicationContext appContext: Context) : BlockDatabase =
+            Room.databaseBuilder(appContext , BlockDatabase::class.java,"blocks_database")
                     .fallbackToDestructiveMigration()
                     .build()
 

@@ -1,46 +1,32 @@
 package com.pete.parkhere.data.repository.impl
 
-import com.pete.parkhere.data.local.Location
-import com.pete.parkhere.data.local.LocationDatabase
+import com.pete.parkhere.data.local.Block
+import com.pete.parkhere.data.local.BlockDatabase
 import com.pete.parkhere.data.repository.LandOwnerProfileRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LandOwnerProfileRepositoryImpl @Inject constructor(private val locationsLocalDB: LocationDatabase)
+class LandOwnerProfileRepositoryImpl @Inject constructor(private val blockLocalDB: BlockDatabase)
     : LandOwnerProfileRepository {
 
-    override suspend fun getAllLocations(): MutableList<Location> {
+    override suspend fun getAllBlocks(): MutableList<Block> {
 
-        return locationsLocalDB
-                .locationDao()
-                .getAllLocations()
-
-//        return object: LiveData<MutableList<Location>>() {
-//            init {
-//                val job = Job()
-//                val coroutineCtx = Dispatchers.IO
-//                CoroutineScope(coroutineCtx + job).launch {
-//                    val newData = locationsLocalDB
-//                        .locationDao()
-//                        .getAllLocations()
-//                    postValue(newData)
-//                }
-//            }
-//        }
+        return blockLocalDB
+                .blockDao()
+                .getAllBlocks()
     }
 
-    override suspend fun insertAll(vararg locations: Location) {
-        locationsLocalDB
-                .locationDao()
-                .insertAll(*locations)
+    override suspend fun insertAll(vararg block: Block) {
+        blockLocalDB
+                .blockDao()
+                .insertAll(*block)
     }
 
-    override suspend fun delete(location: Location) {
-        locationsLocalDB
-                .locationDao()
-                .delete(location)
-    }
+
+//    override suspend fun delete(block: Block) {
+//        blockLocalDB
+//                .blockDao()
+//                .delete(block)
+//    }
 }

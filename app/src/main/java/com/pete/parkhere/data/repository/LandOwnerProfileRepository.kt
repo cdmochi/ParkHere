@@ -1,15 +1,14 @@
 package com.pete.parkhere.data.repository
 
-import androidx.lifecycle.LiveData
-import com.pete.parkhere.data.local.Location
+import com.pete.parkhere.data.local.Block
 
 
 interface LandOwnerProfileRepository {
 
-    suspend fun getAllLocations(): MutableList<Location>
+    suspend fun getAllBlocks(): MutableList<Block>
 
-    suspend fun insertAll(vararg locations: Location)
+    suspend fun insertAll(vararg block: Block)
 
-    suspend fun delete(location: Location)
-
+//    suspend fun delete(location: Block)
+    
 }

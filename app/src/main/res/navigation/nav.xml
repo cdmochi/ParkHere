@@ -4,10 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/landOwnerProfileFragment">
-
     <fragment
         tools:layout="@layout/fragment_land_owner_profile"
         android:id="@+id/landOwnerProfileFragment"
         android:name="com.pete.parkhere.presentation.landowner_profile.LandOwnerProfileFragment"
-        android:label="LandOwnerProfileFragment" />
+        android:label="LandOwnerProfileFragment" >
+        <action
+            android:id="@+id/action_landOwnerProfileFragment_to_landOwnerAdding"
+            app:destination="@id/landOwnerAdding"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_land_owner_adding"
+        android:id="@+id/landOwnerAdding"
+        android:name="com.pete.parkhere.presentation.landowner_adding.LandOwnerAddingFragment"
+        android:label="LandOwnerAdding" >
+        <action
+            android:id="@+id/action_landOwnerAdding_to_landOwnerProfileFragment"
+            app:destination="@id/landOwnerProfileFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_landOwnerAdding_to_mapPickFragment"
+            app:destination="@id/mapPickFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popUpTo="@id/landOwnerAdding" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/map_fragment"
+        android:id="@+id/mapPickFragment"
+        android:name="com.pete.parkhere.presentation.landowner_adding.MapPickFragment"
+        android:label="MapPickFragment" />
 </navigation>

@@ -10,13 +10,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="18dp"
-        tools:context=".presentation.landowner_adding.LandOwnerAdding">
+        tools:context=".presentation.landowner_adding.LandOwnerAddingFragment">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/location_pic_imgview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha=".6"
@@ -28,14 +28,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/location_name_et"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6">
+            app:layout_constraintTop_toBottomOf="@+id/location_pic_imgview">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/location_name_et" />
 
         <com.google.android.material.chip.ChipGroup
             app:checkedChip="@+id/chip1"
@@ -94,9 +94,9 @@
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/time_et"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="139dp"
+            android:layout_width="140dp"
             android:layout_height="55dp"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,72 +115,92 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:text="How many car can park at your location?"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="How many car can park at your location?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/pin_imgbt" />
 
         <com.google.android.material.chip.ChipGroup
-            app:singleLine="true"
-            app:singleSelection="true"
-            android:orientation="horizontal"
             android:id="@+id/avail_park_cg"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3">
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:singleLine="true"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-
                 android:id="@+id/one_park_chip"
+
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
                 android:text="1"
-                android:layout_width="60dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content" />
+                android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:id="@+id/two_park_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
                 android:text="2"
-                android:layout_width="60dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content" />
+                android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:id="@+id/three_park_chip"
-                android:text="3"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="60dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textAlignment="center" />
 
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:id="@+id/four_park_chip"
-                android:text="4"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="60dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textAlignment="center" />
 
         </com.google.android.material.chip.ChipGroup>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/done_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:backgroundTint="@color/orange_bitcoin"
             android:text="DONE"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avail_park_cg" />
 
+
+        <ImageButton
+            android:id="@+id/pin_imgbt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/pin_ic"
+            app:layout_constraintStart_toStartOf="@+id/location_static_tv"
+            app:layout_constraintTop_toBottomOf="@+id/location_static_tv" />
+
+        <TextView
+            android:id="@+id/location_static_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_et" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

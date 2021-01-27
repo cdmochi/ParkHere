@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.pete.parkhere.data.local.Location
+import com.pete.parkhere.data.remote.FirebaseDatabase
+import com.pete.parkhere.data.remote.Location
 import com.pete.parkhere.databinding.FragmentLandOwnerProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +22,8 @@ class LandOwnerProfileFragment : Fragment() {
     private val viewModel by  viewModels<LandOwnerProfileViewModel>()
     var locations = mutableListOf<Location>()
     private var adapter: Adapter = Adapter(locations)
+    
+    private val firebase = FirebaseDatabase
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +42,13 @@ class LandOwnerProfileFragment : Fragment() {
 //            updateAdapter(newList)
 //        })
 
-        val newAdapter = ViewPagerAdapter(this,binding.tabpanelRg)
-        binding.locationVpager.adapter = newAdapter
 
+//        firebase.readFromDatabase {
+//            Log.d("Pete","${it.get(0).name}")
+//        }
+//        val newLocation = Location("User", 12L, 213L ,"",123,"2020/12/3","2020","2021")
+//        firebase.addNewLocation(newLocation)
+        
     }
 
     private fun updateAdapter(newList: MutableList<Location>) {
@@ -54,10 +58,10 @@ class LandOwnerProfileFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-//        val recycler = binding.landsRv
-//        recycler.setHasFixedSize(true)
-//        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-//        recycler.adapter = adapter
+        val recycler = binding.landsRv
+        recycler.setHasFixedSize(true)
+        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        recycler.adapter = adapter
     }
 
     override fun onDestroy() {

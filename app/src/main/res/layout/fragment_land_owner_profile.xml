@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/main_background_color"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_background_color">
 
-    <!--    contains the options to whether BookParklot or OfferParkLocation -->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft ="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
@@ -59,8 +57,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/screen_top_amount_shape"
                 android:ellipsize="end"
-                android:maxLines="1"
                 android:gravity="center"
+                android:maxLines="1"
                 android:text="1243.21"
                 android:textColor="#1E1F1A"
                 android:textSize="54sp"
@@ -73,95 +71,16 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <RadioGroup
-        android:id="@+id/tabpanel_rg"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
-
-        <RadioButton
-            android:id="@+id/book_rbt"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="@drawable/radio_flat_with_anim_selector"
-            android:button="@android:color/transparent"
-            android:checked="true"
-            android:gravity="center"
-            android:text="Park"
-            android:textColor="@drawable/radio_flat_text_selector" />
-
-        <RadioButton
-            android:id="@+id/lend_rbt"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="@drawable/radio_flat_with_anim_selector"
-            android:button="@android:color/transparent"
-            android:gravity="center"
-            android:text="Lend"
-            android:textColor="@drawable/radio_flat_text_selector" />
-    </RadioGroup>
-    <!--    each recycler card's margin is 12 so to match with the a -->
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/location_vpager"
-        android:layout_margin="16dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lands_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg">
-
-    </androidx.viewpager2.widget.ViewPager2>
-
-    <!--    <FrameLayout-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/lands_rv"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tabpanel_rg" >-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView3"-->
-<!--            android:layout_width="130dp"-->
-<!--            android:layout_height="130dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            app:srcCompat="@drawable/no_location_ic" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView5"-->
-<!--            android:layout_width="170dp"-->
-<!--            android:layout_height="170dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:alpha=".2"-->
-<!--            android:rotationX="2"-->
-<!--            app:srcCompat="@drawable/background_circle_shape"-->
-<!--            tools:layout_editor_absoluteX="134dp"-->
-<!--            tools:layout_editor_absoluteY="419dp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal|bottom"-->
-<!--            android:alpha=".6"-->
-<!--            android:text="No Parking Location \n At The Moment"-->
-<!--            android:textAlignment="center"-->
-<!--            tools:layout_editor_absoluteX="88dp"-->
-<!--            tools:layout_editor_absoluteY="560dp" />-->
-
-<!--    </FrameLayout>-->
-
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:itemCount="3"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/land_itemview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

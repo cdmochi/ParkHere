@@ -2,7 +2,7 @@ package com.pete.parkhere.presentation.landowner_profile
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.pete.parkhere.data.local.Location
+import com.pete.parkhere.data.local.Block
 import com.pete.parkhere.data.repository.impl.LandOwnerProfileRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,37 +11,35 @@ class LandOwnerProfileViewModel @ViewModelInject constructor(
         private val repository: LandOwnerProfileRepositoryImpl
 ) : ViewModel() {
 
-    var _locations = MutableLiveData<MutableList<Location>>()
+    var _blocks = MutableLiveData<MutableList<Block>>()
 
     init {
-        val newList = mutableListOf<Location>().apply {
-            add(Location("Bazaar0",1212.12,121.12,"","12:00","14:00",1222))
-            add(Location("Bazaar1",1212.12,121.12,"","12:00","14:00",1222))
-            add(Location("Bazaar2",1212.12,121.12,"","12:00","14:00",1222))
-            add(Location("Bazaar3",1212.12,121.12,"","12:00","14:00",1222))
-            add(Location("Bazaar4",1212.12,121.12,"","12:00","14:00",1222))
-        }
-        getAllLocationsFromLocalDB()
+        getAllBlocksFromLocalDB()
     }
 
-    private fun getAllLocationsFromLocalDB() {
+    private fun getAllBlocksFromLocalDB() {
         viewModelScope.launch {
-            _locations.value = repository.getAllLocations()
+            _blocks.value = repository.getAllBlocks()
         }
     }
 
-    fun addNewLocation(newLocation: Location) {
+    fun addNewBlock(newBlock: Block) {
+
+        //TODO do not add the block rightAway but ask the #Verifier first
+        //TODO if the response is yes add block
+        // A  -Connected Peer Connected With-> Verifier
+        // A   ---------send new Block-------------> Verifier
+        // A   <------------------------------------ Verifier
         viewModelScope.launch {
-            repository.insertAll(newLocation)
-            _locations.value = repository.getAllLocations()
+            repository.insertAll(newBlock)
         }
     }
 
-    fun deleteLocation(location: Location) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(location)
-        }
-    }
+//    fun deleteLocation(block: Block) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.delete(block)
+//        }
+//    }
 
 
 }
